@@ -12,6 +12,9 @@ jobs:
     steps:
       - name: 'PASO 1: Clonando el proyecto...'
         uses: actions/checkout@v4
+        # ¡CAMBIO IMPORTANTE! Le decimos que clone el proyecto dentro de una carpeta específica.
+        with:
+          path: 'Adaptive_movil-PC'
 
       - name: 'PASO 2: Configurando Java y Node.js...'
         uses: actions/setup-java@v4
@@ -25,17 +28,21 @@ jobs:
       - name: 'PASO 3: Instalando Cordova...'
         run: npm install -g cordova
 
-      # EL PASO 4 HA SIDO ELIMINADO. YA NO ES NECESARIO.
+      # ¡¡¡EL PASO CLAVE QUE LO ARREGLA TODO!!!
+      - name: 'PASO 3.5: Entrando en la carpeta del proyecto...'
+        run: cd Adaptive_movil-PC
 
-      - name: 'PASO 4 (NUEVO): Añadiendo la plataforma Android...'
-        # Cordova usará automáticamente el config.xml y la carpeta www que ya existen.
+      - name: 'PASO 4: Añadiendo la plataforma Android...'
+        # ¡CAMBIO IMPORTANTE! Ahora todos los comandos se ejecutan desde la carpeta correcta.
+        working-directory: ./Adaptive_movil-PC
         run: cordova platform add android
 
       - name: 'PASO 5: CONSTRUYENDO LA APK...'
+        working-directory: ./Adaptive_movil-PC
         run: cordova build android --release
 
       - name: 'PASO 6: Subiendo la APK como Artefacto...'
         uses: actions/upload-artifact@v4
         with:
           name: Adaptive-Movil-PC-APK
-          path: platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk
+          path: Adaptive_movil-PC/platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk
