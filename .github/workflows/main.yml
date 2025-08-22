@@ -25,20 +25,17 @@ jobs:
       - name: 'PASO 3: Instalando Cordova...'
         run: npm install -g cordova
 
-      - name: 'PASO 4: Moviendo el código a la carpeta www...'
-        run: |
-          mkdir -p www
-          mv index.html style.css script.js www/
+      # EL PASO 4 HA SIDO ELIMINADO. YA NO ES NECESARIO.
 
-      - name: 'PASO 5: Añadiendo la plataforma Android...'
+      - name: 'PASO 4 (NUEVO): Añadiendo la plataforma Android...'
+        # Cordova usará automáticamente el config.xml y la carpeta www que ya existen.
         run: cordova platform add android
 
-      - name: 'PASO 6: CONSTRUYENDO LA APK...'
+      - name: 'PASO 5: CONSTRUYENDO LA APK...'
         run: cordova build android --release
 
-      - name: 'PASO 7: Subiendo la APK...'
+      - name: 'PASO 6: Subiendo la APK como Artefacto...'
         uses: actions/upload-artifact@v4
         with:
           name: Adaptive-Movil-PC-APK
           path: platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk
-
