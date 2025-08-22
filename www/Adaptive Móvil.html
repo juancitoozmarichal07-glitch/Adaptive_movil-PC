@@ -1,1 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Adaptive Movil PC</title>
+    <!-- Asegúrate de que el nombre del archivo CSS sea correcto -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="desktop">
+        <!-- Ventana de ejemplo. La posición inicial la controlaremos con CSS -->
+        <div class="window">
+            <div class="title-bar">
+                <span class="title">Bloc de Notas</span>
+                <div class="window-controls">
+                    <button class="minimize" title="Minimizar">_</button>
+                    <button class="maximize" title="Maximizar">[]</button>
+                    <button class="close" title="Cerrar">X</button>
+                </div>
+            </div>
+            <div class="window-body">
+                <textarea placeholder="Escribe algo aquí..."></textarea>
+            </div>
+        </div>
+    </div>
+
+    <div id="taskbar">
+        <button id="start-button">Inicio</button>
+        <div id="task-buttons">
+            <button class="task-button active">
+                <span>Bloc de Notas</span>
+            </button>
+        </div>
+        <div id="system-tray">
+            <span id="clock">12:00</span>
+        </div>
+    </div>
+
+    <!-- Asegúrate de que el nombre del archivo JS sea correcto -->
+    <script src="script.js"></script>
+</body>
+</html>
 
