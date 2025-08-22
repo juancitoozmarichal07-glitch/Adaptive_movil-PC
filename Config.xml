@@ -1,1 +1,22 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.adaptivemovilpc.gel" version="0.1.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Adaptive Movil PC</name>
+    <description>
+        Un GEL Virtual que transforma un dispositivo móvil en una experiencia de escritorio completa.
+    </description>
+    <author email="Juanmarichal57@Gmail.com" href="https://github.com/juancitoozmarichal07-glitch/Adaptive_movil-PC">
+        Juan Gonzalo Marichal Cardozo
+    </author>
+    <content src="index.html" />
+    <access origin="*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    
+    <!-- Preferencias Clave para la Experiencia de Escritorio -->
+    <preference name="DisallowOverscroll" value="true" />
+    <preference name="Orientation" value="landscape" />
+    <preference name="Fullscreen" value="true" />
+    <preference name="AndroidXEnabled" value="true" />
+
+</widget>
 
