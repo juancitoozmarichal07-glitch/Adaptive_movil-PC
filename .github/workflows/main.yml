@@ -25,24 +25,23 @@ jobs:
       - name: 'PASO 3: Instalando Cordova...'
         run: npm install -g cordova
 
-      # ¡¡¡LA LÓGICA CORRECTA!!!
-      # Como tu repositorio ya tiene la estructura correcta (www/, config.xml),
-      # simplemente le decimos a Cordova que cree el proyecto aquí mismo.
-      # Usamos 'cordova create .' para decirle "crea el proyecto en la carpeta actual".
       - name: 'PASO 4: Inicializando el proyecto Cordova...'
         run: |
-          # Creamos un proyecto de Cordova en la carpeta actual, usando los archivos existentes.
-          # Primero, movemos nuestros archivos a una carpeta temporal.
+          # Creamos una carpeta temporal para nuestros archivos.
           mkdir ../temp_files
+          # Movemos nuestros archivos (con los nombres correctos) a la carpeta temporal.
           mv www ../temp_files/
-          mv config.xml ../temp_files/
-          # Creamos el proyecto Cordova.
+          mv Config.xml ../temp_files/  # <-- ¡AQUÍ ESTÁ LA CORRECCIÓN!
+          
+          # Creamos el proyecto Cordova en la carpeta actual.
           cordova create . com.adaptivemovilpc.gel "Adaptive Movil PC"
-          # Borramos la carpeta 'www' y 'config.xml' por defecto.
+          
+          # Borramos la carpeta 'www' y 'config.xml' por defecto que crea Cordova.
           rm -rf www config.xml
-          # Movemos nuestros archivos de vuelta.
+          
+          # Movemos nuestros archivos personalizados de vuelta.
           mv ../temp_files/www .
-          mv ../temp_files/config.xml .
+          mv ../temp_files/Config.xml . # <-- ¡AQUÍ ESTÁ LA CORRECCIÓN!
 
       - name: 'PASO 5: Añadiendo la plataforma Android...'
         run: cordova platform add android
