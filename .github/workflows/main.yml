@@ -12,8 +12,6 @@ jobs:
     steps:
       - name: 'PASO 1: Clonando el proyecto...'
         uses: actions/checkout@v4
-        # Clonamos el repositorio en la carpeta actual del runner.
-        # No necesitamos especificar 'path' aquí si la estructura ya está en la raíz.
 
       - name: 'PASO 2: Configurando Java y Node.js...'
         uses: actions/setup-java@v4
@@ -27,22 +25,27 @@ jobs:
       - name: 'PASO 3: Instalando Cordova...'
         run: npm install -g cordova
 
-      # ¡¡¡ESTE ES EL PASO CLAVE!!!
-      # Todos los comandos de Cordova deben ejecutarse desde la raíz del proyecto.
-      # Como tu estructura ya tiene www/ y config.xml en la raíz del repo,
-      # simplemente le decimos a cada comando que trabaje desde '.' (la raíz).
+      # --- ¡¡¡LA LÓGICA QUE FALTABA!!! ---
+      - name: 'PASO 4: Creando el proyecto Cordova...'
+        # 1. Creamos una carpeta temporal 'temp_project'
+        # 2. Creamos el proyecto Cordova dentro de ella
+        # 3. Movemos el contenido de nuestro repositorio (www, config.xml) a la carpeta del proyecto, sobreescribiendo los archivos por defecto.
+        # 4. Movemos el proyecto ya listo de vuelta a la raíz.
+        run: |
+          cordova create temp_project com.adaptivemovilpc.gel "Adaptive Movil PC"
+          rsync -a --remove-source-files www/ temp_project/www/
+          rsync -a --remove-source-files config.xml temp_project/config.xml
+          mv temp_project/* .
+          rm -rf temp_project
 
-      - name: 'PASO 4: Añadiendo la plataforma Android...'
-        working-directory: . # Ejecuta este comando desde la raíz del repositorio
+      - name: 'PASO 5: Añadiendo la plataforma Android...'
         run: cordova platform add android
 
-      - name: 'PASO 5: CONSTRUYENDO LA APK...'
-        working-directory: . # Ejecuta este comando desde la raíz del repositorio
+      - name: 'PASO 6: CONSTRUYENDO LA APK...'
         run: cordova build android --release
 
-      - name: 'PASO 6: Subiendo la APK como Artefacto...'
+      - name: 'PASO 7: Subiendo la APK como Artefacto...'
         uses: actions/upload-artifact@v4
         with:
           name: Adaptive-Movil-PC-APK
-          # La ruta de la APK, asumiendo que se construye en la raíz del repositorio
           path: platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk
