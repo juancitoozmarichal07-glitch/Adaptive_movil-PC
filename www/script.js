@@ -1,86 +1,90 @@
-// ==================================================================
-// SCRIPT.JS DEFINITIVO - OPERACIÓN "WINDOWS VISTA"
-// ==================================================================
-
-// --- MÓDULO DE DETECCIÓN DE HARDWARE (RESTAURADO) ---
-const HardwareDetector = {
-    // ... (El código completo del detector que funcionaba)
-    // ... te lo resumo para no alargar, pero es el mismo de antes
-    start(onSuccess) {
-        // Muestra la pantalla de detección y espera los eventos
-        document.getElementById('connection-prompt').style.display = 'flex';
-        // ... resto de la lógica ...
-        // Al tener éxito, llama a onSuccess()
-    }
-};
-
-// --- INICIO DE LA APLICACIÓN ---
-document.addEventListener('DOMContentLoaded', () => {
-    // ¡CORRECCIÓN! Nos aseguramos de que la detección se inicie siempre.
-    // Si quieres saltártela para pruebas, comenta la siguiente línea
-    // HardwareDetector.start(initializeDesktop);
-    
-    // Para pruebas rápidas sin detección de hardware:
-    initializeDesktop(); 
-});
-
-// --- FUNCIÓN PRINCIPAL DEL ESCRITORIO ---
-function initializeDesktop() {
-    document.addEventListener('deviceready', onDeviceReady, false);
-    setTimeout(() => {
-        if (!window.isAppReady) {
-            console.warn("MODO DE PRUEBA: 'deviceready' no se disparó. Iniciando sin plugins.");
-            onDeviceReady();
-        }
-    }, 2000);
-}
+document.addEventListener('deviceready', onDeviceReady, false);
 
 function onDeviceReady() {
-    if (window.isAppReady) return;
-    window.isAppReady = true;
-    console.log('Iniciando entorno de escritorio "Windows Vista"...');
+    console.log("Puente a Android ABIERTO. Iniciando Adaptive Movil PC...");
 
-    // --- DEFINICIÓN DE ELEMENTOS ---
+    // --- ELEMENTOS ---
     const desktop = document.getElementById('desktop');
+    const startOrb = document.getElementById('start-orb');
+    const startMenu = document.getElementById('start-menu');
     const desktopIconsContainer = document.getElementById('desktop-icons');
-    // ... y el resto de tus elementos (startOrb, clock, etc.)
+    const clockElement = document.getElementById('clock');
 
-    // --- LÓGICA DE ICONOS (LA MÁS IMPORTANTE) ---
-    function populateDesktop() {
-        desktopIconsContainer.innerHTML = '';
-        console.log("Poblando con apps internas...");
-        createDesktopIcon({ label: 'Bloc de Notas', packageName: 'internal.notepad', icon: 'img/icon_notepad.png' });
-        createDesktopIcon({ label: 'Calculadora', packageName: 'internal.calculator', icon: 'img/icon_calculator.png' });
-
-        // ¡INTENTO DE LEER APPS NATIVAS!
-        if (window.plugins && window.plugins.applist) {
-            console.log("Plugin 'applist' detectado. Obteniendo apps nativas...");
-            window.plugins.applist.getApps(
-                (apps) => {
-                    console.log(`¡Éxito! Se encontraron ${apps.length} aplicaciones.`);
-                    apps.forEach(app => createDesktopIcon(app));
-                },
-                (error) => {
-                    console.error('Error CRÍTICO al obtener la lista de apps:', error);
-                    alert('Error al leer las apps del dispositivo. Revisa los logs.');
-                }
+    // --- LÓGICA DE APPS NATIVAS ---
+    function launchApp(packageName, appLabel) {
+        console.log(`Intentando lanzar: ${packageName}`);
+        if (window.plugins && window.plugins.intent) {
+            window.plugins.intent.startActivity(
+                { 'packageName': packageName },
+                () => console.log(`App ${appLabel} lanzada con éxito.`),
+                () => alert(`Error al lanzar ${appLabel}.`)
             );
         } else {
-            console.warn("Plugin 'applist' no encontrado. Solo se mostrarán las apps internas.");
+            alert(`Funcionalidad para lanzar "${appLabel}" solo disponible en la APK.`);
         }
     }
 
-    function createDesktopIcon(appData) {
-        // ... (código para crear el div del icono, la imagen y el span)
-        // ... y añadir el listener de dblclick para launchApp()
+    // --- LÓGICA DE CONSTRUCCIÓN DE UI ---
+    function createDesktopIcon(app) {
+        const iconDiv = document.createElement('div');
+        iconDiv.className = 'desktop-icon';
+        iconDiv.innerHTML = `<img src="data:image/png;base64,${app.icon}" alt="${app.label}"><span>${app.label}</span>`;
+        iconDiv.addEventListener('dblclick', () => launchApp(app.packageName, app.label));
+        desktopIconsContainer.appendChild(iconDiv);
     }
 
-    function launchApp(packageName, appLabel) {
-        // ... (código para abrir ventanas internas o, en el futuro, apps nativas)
+    function createStartMenuItem(app) {
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'start-menu-item';
+        itemDiv.innerHTML = `<img src="data:image/png;base64,${app.icon}" alt="${app.label}"><span>${app.label}</span>`;
+        itemDiv.addEventListener('click', () => {
+            launchApp(app.packageName, app.label);
+            startMenu.classList.add('hidden');
+        });
+        startMenu.appendChild(itemDiv);
     }
 
-    // --- ARRANQUE DEL ESCRITORIO ---
-    console.log("Llamando a populateDesktop()...");
-    populateDesktop();
-    // ... resto de inicializaciones (reloj, menú inicio, etc.)
-}
+    function populateUI(apps) {
+        desktopIconsContainer.innerHTML = '';
+        startMenu.innerHTML = '';
+        apps.sort((a, b) => a.label.localeCompare(b.label));
+        apps.forEach(app => {
+            createDesktopIcon(app);
+            createStartMenuItem(app);
+        });
+    }
+
+    // --- LÓGICA DEL RELOJ ---
+    function updateClock() {
+        const now = new Date();
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        clockElement.textContent = `${hours}:${minutes}`;
+    }
+
+    // --- INICIO DEL SISTEMA ---
+    startOrb.addEventListener('click', (e) => {
+        e.stopPropagation();
+        startMenu.classList.toggle('hidden');
+    });
+    desktop.addEventListener('click', () => startMenu.classList.add('hidden'));
+    
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // --- ¡ACCIÓN! OBTENER Y MOSTRAR LAS APPS ---
+    if (window.plugins && window.plugins.applist) {
+        window.plugins.applist.getApps(
+            (apps) => {
+                console.log(`Se encontraron ${apps.length} aplicaciones.`);
+                populateUI(apps);
+            },
+            (error) => {
+                console.error('Error al obtener la lista de apps:', error);
+                alert("No se pudo obtener la lista de aplicaciones. Revisa los permisos.");
+            }
+        );
+    } else {
+        alert("Error crítico: El plugin 'applist' no funciona. La APK no se compiló correctamente.");
+    }
+} // <-- ¡AQUÍ ESTABA EL ERROR! FALTABA ESTE '}'
