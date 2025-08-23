@@ -23,10 +23,12 @@ jobs:
           node-version: '18'
 
       # ==================================================================
-      # ▼▼▼ ¡LA LÍNEA MÁGICA! AHORA CON LA SINTAXIS CORRECTA ▼▼▼
+      # ▼▼▼ ¡LA LÍNEA MÁGICA! AHORA EN UN BLOQUE SEGURO ▼▼▼
       # ==================================================================
       - name: 'PASO 3: Forzando a Git a usar HTTPS en lugar de SSH...'
-        run: git config --global url.https://github.com/.insteadOf git@github.com:
+        run: |
+          git config --global url."https://".insteadOf git://
+          git config --global url."https://github.com/".insteadOf git@github.com:
 
       - name: 'PASO 4: Instalando Cordova...'
         run: npm install -g cordova
