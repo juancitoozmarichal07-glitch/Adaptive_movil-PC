@@ -1,66 +1,17 @@
-/* Estilos completos para Adaptive Movil PC - Estética Vista */
-body, html {
-    margin: 0; padding: 0; width: 100%; height: 100%;
-    overflow: hidden; font-family: "Segoe UI", Tahoma, sans-serif;
-    /* Fondo de color sólido, no necesita la carpeta 'img' */
-    background-color: #303a52; 
-}
+body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; font-family: "Segoe UI", sans-serif; background-color: #303a52; }
 .hidden { display: none !important; }
-
-#desktop {
-    width: 100%; height: 100%; position: relative;
-}
-
-#desktop-icons {
-    position: absolute; top: 15px; left: 15px;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, 90px);
-    grid-template-rows: repeat(auto-fill, 100px);
-    gap: 10px;
-    z-index: 10;
-}
-.desktop-icon {
-    width: 90px; height: 100px; display: flex; flex-direction: column;
-    align-items: center; padding: 5px; box-sizing: border-box;
-    cursor: pointer; border: 1px solid transparent; border-radius: 3px;
-}
-.desktop-icon img {
-    width: 48px; height: 48px; margin-bottom: 8px;
-}
-.desktop-icon span {
-    color: white; font-size: 13px; text-align: center;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
-    word-wrap: break-word; max-height: 3.5em; overflow: hidden;
-}
-.desktop-icon:hover {
-    background-color: rgba(70, 130, 220, 0.3);
-    border: 1px solid rgba(100, 150, 255, 0.7);
-}
-
-#taskbar {
-    position: absolute; bottom: 0; left: 0; width: 100%; height: 45px;
-    background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-    display: flex; align-items: center; padding: 0 5px; box-sizing: border-box; z-index: 1000;
-}
-#start-orb {
-    width: 40px; height: 40px; border-radius: 50%; display: flex;
-    align-items: center; justify-content: center; cursor: pointer;
-    background: radial-gradient(circle, #5a5a5a, #1a1a1a); border: 1px solid #888;
-}
+#desktop { width: 100%; height: 100%; position: relative; }
+#desktop-icons { position: absolute; top: 15px; left: 15px; display: grid; grid-template-columns: repeat(auto-fill, 90px); grid-template-rows: repeat(auto-fill, 100px); gap: 10px; }
+.desktop-icon { width: 90px; height: 100px; display: flex; flex-direction: column; align-items: center; padding: 5px; box-sizing: border-box; cursor: pointer; border: 1px solid transparent; border-radius: 3px; }
+.desktop-icon img { width: 48px; height: 48px; margin-bottom: 8px; }
+.desktop-icon span { color: white; font-size: 13px; text-align: center; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8); }
+.desktop-icon:hover { background-color: rgba(70, 130, 220, 0.3); border: 1px solid rgba(100, 150, 255, 0.7); }
+#taskbar { position: absolute; bottom: 0; left: 0; width: 100%; height: 45px; background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border-top: 1px solid rgba(255, 255, 255, 0.2); display: flex; align-items: center; padding: 0 5px; box-sizing: border-box; z-index: 1000; }
+#start-orb { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; background: radial-gradient(circle, #5a5a5a, #1a1a1a); border: 1px solid #888; }
 #start-orb span { color: white; font-weight: bold; font-size: 24px; }
 #task-list { flex-grow: 1; margin: 0 10px; }
 #clock { color: white; font-size: 14px; }
-
-#start-menu {
-    position: absolute; bottom: 50px; left: 5px; width: 300px;
-    background: rgba(20, 25, 35, 0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 8px;
-    padding: 5px; box-sizing: border-box; z-index: 1001;
-}
-.start-menu-item {
-    padding: 10px; color: white; cursor: pointer; border-radius: 3px;
-    display: flex; align-items: center; gap: 10px;
-}
+#start-menu { position: absolute; bottom: 50px; left: 5px; width: 300px; background: rgba(20, 25, 35, 0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 8px; padding: 5px; box-sizing: border-box; z-index: 1001; }
+.start-menu-item { padding: 10px; color: white; cursor: pointer; border-radius: 3px; display: flex; align-items: center; gap: 10px; }
 .start-menu-item:hover { background-color: #0078D7; }
 .start-menu-item img { width: 32px; height: 32px; }

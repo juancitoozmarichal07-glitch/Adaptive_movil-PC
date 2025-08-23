@@ -2,31 +2,21 @@
 <html>
 <head>
     <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
-    <meta name="format-detection" content="telephone=no">
-    <meta name="msapplication-tap-highlight" content="no">
     <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
-    
     <title>Adaptive Movil PC</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
     <div id="desktop">
-        <!-- Los iconos de tus apps de Android se crearán aquí dinámicamente -->
         <div id="desktop-icons"></div>
     </div>
-
     <div id="taskbar">
         <div id="start-orb-container"><div id="start-orb"><span>A</span></div></div>
         <div id="task-list"></div>
         <div id="system-tray"><div id="clock">00:00</div></div>
     </div>
-
-    <!-- El menú de inicio también se llenará dinámicamente -->
     <div id="start-menu" class="hidden"></div>
-
     <script src="cordova.js"></script>
     <script src="script.js"></script>
-
 </body>
 </html>
