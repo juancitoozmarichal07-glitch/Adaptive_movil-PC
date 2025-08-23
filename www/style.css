@@ -1,114 +1,138 @@
-/* Estilos v6 - Preparado para APK */
+/* ... (Estilos anteriores sin cambios) ... */
 body, html {
-    margin: 0;
-    padding: 0;
     width: 100%;
     height: 100%;
+    margin: 0;
     overflow: hidden;
     font-family: sans-serif;
+    background-color: #333;
     user-select: none;
-    -webkit-user-select: none; /* Para compatibilidad con Webview de Android */
-    touch-action: none; /* Desactiva gestos de zoom/scroll del navegador */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 #desktop {
     width: 100%;
-    height: 100%;
-    background: url('https://i.imgur.com/M8k4d5X.jpeg') no-repeat center center;
-    background-size: cover;
+    height: calc(100% - 40px);
+    background: url('https://i.imgur.com/8z3Z6kL.png') center/cover; /* Fondo de escritorio */
     position: relative;
 }
 
-#taskbar {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 40px;
-    background: linear-gradient(to bottom, #3a3a3a, #1a1a1a);
-    border-top: 1px solid #555;
-    box-shadow: 0 -2px 5px rgba(0,0,0,0.5);
-    display: flex;
-    align-items: center;
-    color: white;
-    padding: 0 5px;
-    box-sizing: border-box;
-    z-index: 1000;
-}
-
-#start-button {
-    background-color: #228B22;
-    color: white;
-    border: 1px solid #3c9d3c;
-    border-radius: 3px;
-    padding: 5px 15px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-#task-buttons { flex-grow: 1; margin-left: 10px; display: flex; }
-.task-button {
-    background: linear-gradient(to bottom, #5a5a5a, #4a4a4a);
-    border: 1px solid #777;
-    color: white;
-    padding: 0 15px;
-    height: 30px;
-    border-radius: 3px;
-    margin-right: 5px;
-    max-width: 200px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-.task-button.active { background: linear-gradient(to bottom, #7a7a7a, #6a6a6a); }
-#system-tray { padding: 0 10px; }
-
 .window {
     position: absolute;
-    top: 50px; /* Posición inicial */
-    left: 50px; /* Posición inicial */
-    width: 500px;
-    height: 350px;
-    background-color: #ececec;
     border: 1px solid #999;
+    background-color: #f0f0f0;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
     border-radius: 5px;
-    box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    min-width: 250px;
+    min-height: 150px;
     display: flex;
     flex-direction: column;
 }
 
 .title-bar {
-    background: linear-gradient(to bottom, #d0d0d0, #b0b0b0);
-    padding: 5px 10px;
-    font-weight: bold;
+    background-color: #ddd;
+    padding: 5px;
     cursor: move;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid #999;
+    border-bottom: 1px solid #ccc;
+    font-weight: bold;
 }
 
 .window-controls button {
-    width: 25px;
+    width: 20px;
     height: 20px;
-    border: 1px solid #888;
+    border: 1px solid #999;
     margin-left: 3px;
-    font-family: "Courier New", monospace;
-    font-weight: bold;
     cursor: pointer;
 }
-.window-controls .close { background-color: #ff605c; }
-.window-controls .minimize { background-color: #ffbd44; }
-.window-controls .maximize { background-color: #00ca4e; }
+.window-controls .minimize { background-color: lightblue; }
+.window-controls .maximize { background-color: lightgreen; }
+.window-controls .close { background-color: lightcoral; }
 
-.window-body { flex-grow: 1; padding: 5px; display: flex; }
-.window-body textarea {
+.content {
+    padding: 10px;
+    flex-grow: 1;
+}
+
+.content textarea {
     width: 100%;
     height: 100%;
     border: 1px solid #ccc;
-    resize: none;
     box-sizing: border-box;
-    font-family: monospace;
-    font-size: 14px;
+    resize: none;
 }
 
+#taskbar {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 40px;
+    background-color: #222;
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 0 5px;
+    box-sizing: border-box;
+    z-index: 1000;
+}
+
+.taskbar-item {
+    padding: 5px 10px;
+    margin: 0 2px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+#start-button {
+    background-color: #008000;
+    font-weight: bold;
+}
+
+#task-list {
+    display: flex;
+    flex-grow: 1;
+}
+
+.task-item {
+    background-color: #555;
+    border: 1px solid #777;
+    min-width: 150px; /* Estilo Windows Vista */
+    text-align: center;
+}
+
+#clock {
+    margin-left: auto;
+}
+
+/* --- ¡NUEVOS ESTILOS! --- */
+#start-menu {
+    position: absolute;
+    bottom: 40px; /* Justo encima de la barra de tareas */
+    left: 0;
+    width: 200px;
+    background-color: #333;
+    border: 1px solid #777;
+    color: white;
+    z-index: 999; /* Debajo de la barra de tareas pero encima del escritorio */
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+.start-menu-item {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.start-menu-item:hover {
+    background-color: #555;
+}
+
+.hidden {
+    display: none;
+}

@@ -4,42 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Adaptive Movil PC</title>
-    <!-- Asegúrate de que el nombre del archivo CSS sea correcto -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
     <div id="desktop">
-        <!-- Ventana de ejemplo. La posición inicial la controlaremos con CSS -->
-        <div class="window">
-            <div class="title-bar">
-                <span class="title">Bloc de Notas</span>
-                <div class="window-controls">
-                    <button class="minimize" title="Minimizar">_</button>
-                    <button class="maximize" title="Maximizar">[]</button>
-                    <button class="close" title="Cerrar">X</button>
-                </div>
-            </div>
-            <div class="window-body">
-                <textarea placeholder="Escribe algo aquí..."></textarea>
-            </div>
-        </div>
+        <!-- La ventana del Bloc de Notas ya no estará aquí, la crearemos con JS -->
     </div>
 
     <div id="taskbar">
-        <button id="start-button">Inicio</button>
-        <div id="task-buttons">
-            <button class="task-button active">
-                <span>Bloc de Notas</span>
-            </button>
+        <div id="start-button" class="taskbar-item">Inicio</div>
+        <div id="task-list">
+            <!-- Los botones de las apps se añadirán aquí con JS -->
         </div>
-        <div id="system-tray">
-            <span id="clock">12:00</span>
-        </div>
+        <div id="clock" class="taskbar-item"></div>
     </div>
 
-    <!-- Asegúrate de que el nombre del archivo JS sea correcto -->
+    <!-- ¡NUEVO! El Menú Inicio (inicialmente oculto) -->
+    <div id="start-menu" class="hidden">
+        <div class="start-menu-item" data-app="notepad">Bloc de Notas</div>
+        <div class="start-menu-item" data-app="calculator">Calculadora (Próximamente)</div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
-
