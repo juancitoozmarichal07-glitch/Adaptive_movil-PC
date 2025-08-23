@@ -22,25 +22,33 @@ jobs:
         with:
           node-version: '18'
 
-      - name: 'PASO 3: Instalando Cordova...'
+      # ==================================================================
+      # ▼▼▼ ¡LA LÍNEA MÁGICA! AÑADIDA A TU PROPIO ARCHIVO ▼▼▼
+      # ==================================================================
+      - name: 'PASO 3: Forzando a Git a usar HTTPS en lugar de SSH...'
+        run: git config --global url."https://github.com/".insteadOf git@github.com:
+
+      - name: 'PASO 4: Instalando Cordova...'
         run: npm install -g cordova
 
-      - name: 'PASO 4: Creando y Configurando el Proyecto Cordova...'
+      - name: 'PASO 5: Creando y Configurando el Proyecto Cordova...'
         run: |
           cordova create cordova_project com.adaptivemovilpc.gel "Adaptive Movil PC"
           rm -rf cordova_project/www
           cp -r www cordova_project/
-          cp Config.xml cordova_project/config.xml # Asegúrate de que el nombre del archivo sea 'config.xml' en minúsculas
+          # Usamos tu nombre de archivo 'Config.xml' con mayúscula, como lo tenías.
+          cp Config.xml cordova_project/config.xml
           
-      - name: 'PASO 5: Añadiendo plataforma e instalando plugins...' # <-- ¡PASO CLAVE AÑADIDO!
+      - name: 'PASO 6: Añadiendo plataforma e instalando plugins...'
+        # Mantenemos tu excelente comando que usa 'cordova prepare'
         run: cordova platform add android && cordova prepare android
         working-directory: ./cordova_project
 
-      - name: 'PASO 6: CONSTRUYENDO LA APK (MODO DEBUG)...'
+      - name: 'PASO 7: CONSTRUYENDO LA APK (MODO DEBUG)...'
         run: cordova build android --debug
         working-directory: ./cordova_project
 
-      - name: 'PASO 7: Subiendo la APK de DEBUG como Artefacto...'
+      - name: 'PASO 8: Subiendo la APK de DEBUG como Artefacto...'
         uses: actions/upload-artifact@v4
         with:
           name: Adaptive-Movil-PC-APK
