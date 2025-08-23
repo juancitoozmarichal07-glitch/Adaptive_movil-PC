@@ -32,13 +32,8 @@ jobs:
           cp -r www cordova_project/
           cp Config.xml cordova_project/config.xml
           
-      # ==================================================================
-      # ▼▼▼ ¡LA MAGIA FINAL! REPARAMOS GIT JUSTO ANTES DE INSTALAR ▼▼▼
-      # ==================================================================
-      - name: 'PASO 5: Añadiendo plataforma e instalando plugins (CON REPARACIÓN)...'
-        run: |
-          git config --global url."https://github.com/".insteadOf git@github.com:
-          cordova platform add android && cordova prepare android
+      - name: 'PASO 5: Añadiendo la plataforma Android...'
+        run: cordova platform add android
         working-directory: ./cordova_project
 
       - name: 'PASO 6: CONSTRUYENDO LA APK (MODO DEBUG)...'
@@ -49,4 +44,6 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: Adaptive-Movil-PC-APK
+          # --- ¡¡¡AQUÍ ESTÁ LA CORRECCIÓN FINAL!!! ---
+          # La ruta correcta a la APK de debug.
           path: cordova_project/platforms/android/app/build/outputs/apk/debug/app-debug.apk

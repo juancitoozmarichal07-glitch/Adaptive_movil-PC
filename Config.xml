@@ -1,36 +1,22 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.adaptivemovilpc.gel" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Adaptive Movil PC</name>
-    <description>
-        Una máquina virtual de experiencia de escritorio para Android.
-    </description>
-    <author email="Juanmarichal57@Gmail.com" href="https://github.com/juancitoozmarichal07-glitch/Adaptive_movil-PC">
-        Juan Gonzalo Marichal Cardozo
-    </author>
+    <description>Una máquina virtual de experiencia de escritorio para Android.</description>
+    <author email="Juanmarichal57@Gmail.com" href="https://github.com/juancitoozmarichal07-glitch/Adaptive_movil-PC">Juan Gonzalo Marichal Cardozo</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
-    <allow-intent href="tel:*" />
-    <allow-intent href="sms:*" />
-    <allow-intent href="mailto:*" />
-    <allow-intent href="geo:*" />
-    <platform name="android">
-        <allow-intent href="market:*" />
-    </platform>
-    
-    <!-- Preferencias Clave -->
+    <platform name="android"><allow-intent href="market:*" /></platform>
     <preference name="DisallowOverscroll" value="true" />
     <preference name="Orientation" value="landscape" />
     <preference name="Fullscreen" value="true" />
     <preference name="AndroidXEnabled" value="true" />
 
     <!-- ================================================================== -->
-    <!-- ▼▼▼ ¡EL PUENTE A ANDROID, VERSIÓN 4.0! (Forzando HTTPS) ▼▼▼ -->
+    <!-- ▼▼▼ ¡EL PUENTE A ANDROID! Usando las versiones ESTABLES ▼▼▼ -->
     <!-- ================================================================== -->
-    
-    <!-- Añadimos "git+" al principio para forzar el uso de HTTPS -->
-    <plugin name="cordova-plugin-intent" spec="git+https://github.com/napolitano/cordova-plugin-intent.git" />
-    <plugin name="cordova-plugin-apps-retriever" spec="git+https://github.com/Jos-F/cordova-plugin-apps-retriever.git" />
+    <plugin name="cordova-plugin-intent" spec="1.1.1" />
+    <plugin name="cordova-plugin-applist" spec="2.2.1" />
 
 </widget>
