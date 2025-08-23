@@ -7,16 +7,18 @@
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
-    <platform name="android"><allow-intent href="market:*" /></platform>
+    <platform name="android">
+        <allow-intent href="market:*" />
+    </platform>
     <preference name="DisallowOverscroll" value="true" />
     <preference name="Orientation" value="landscape" />
     <preference name="Fullscreen" value="true" />
     <preference name="AndroidXEnabled" value="true" />
 
     <!-- ================================================================== -->
-    <!-- ▼▼▼ ¡EL PUENTE A ANDROID! Usando las versiones ESTABLES ▼▼▼ -->
+    <!-- ▼▼▼ EL PUENTE A ANDROID - VERSIÓN FÉNIX (Mínima y Robusta) ▼▼▼ -->
     <!-- ================================================================== -->
-    <plugin name="cordova-plugin-intent" spec="1.1.1" />
-    <plugin name="cordova-plugin-applist" spec="2.2.1" />
+    <plugin name="cordova-plugin-intent" />
+    <plugin name="cordova-plugin-applist" />
 
 </widget>

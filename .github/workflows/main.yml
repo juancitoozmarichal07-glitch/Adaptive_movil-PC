@@ -1,4 +1,4 @@
-name: Construir APK de Adaptive Movil PC
+name: Construir APK de Adaptive Movil PC (Fénix)
 
 on:
   push:
@@ -25,7 +25,7 @@ jobs:
       - name: 'PASO 3: Instalando Cordova...'
         run: npm install -g cordova
 
-      - name: 'PASO 4: Creando y Configurando el Proyecto Cordova...'
+      - name: 'PASO 4: Creando el Proyecto Cordova...'
         run: |
           cordova create cordova_project com.adaptivemovilpc.gel "Adaptive Movil PC"
           rm -rf cordova_project/www
@@ -36,14 +36,22 @@ jobs:
         run: cordova platform add android
         working-directory: ./cordova_project
 
-      - name: 'PASO 6: CONSTRUYENDO LA APK (MODO DEBUG)...'
+      # ==================================================================
+      # ▼▼▼ ¡LA NUEVA ESTRATEGIA! INSTALACIÓN MANUAL Y FORZADA ▼▼▼
+      # ==================================================================
+      - name: 'PASO 6: Reparando Git e Instalando Plugins...'
+        working-directory: ./cordova_project
+        run: |
+          git config --global url."https://github.com/".insteadOf git@github.com:
+          cordova plugin add cordova-plugin-intent
+          cordova plugin add cordova-plugin-applist
+
+      - name: 'PASO 7: CONSTRUYENDO LA APK (MODO DEBUG)...'
         run: cordova build android --debug
         working-directory: ./cordova_project
 
-      - name: 'PASO 7: Subiendo la APK de DEBUG como Artefacto...'
+      - name: 'PASO 8: Subiendo la APK de DEBUG como Artefacto...'
         uses: actions/upload-artifact@v4
         with:
           name: Adaptive-Movil-PC-APK
-          # --- ¡¡¡AQUÍ ESTÁ LA CORRECCIÓN FINAL!!! ---
-          # La ruta correcta a la APK de debug.
           path: cordova_project/platforms/android/app/build/outputs/apk/debug/app-debug.apk
