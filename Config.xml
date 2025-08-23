@@ -20,6 +20,8 @@
 
     <!-- ▼▼▼ ¡AQUÍ ESTÁ LA CORRECCIÓN! ▼▼▼ -->
     <!-- Este es el "puente" correcto y disponible para leer la lista de apps -->
-    <plugin name="cordova-plugin-applist" spec="2.2.2" />
+<!-- ▼▼▼ REEMPLAZA LA LÍNEA DEL PLUGIN OTRA VEZ POR ESTA VERSIÓN MÁS SIMPLE ▼▼▼ -->
+<plugin name="cordova-plugin-applist" />
+
 
 </widget>
