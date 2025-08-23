@@ -3,21 +3,30 @@
     <name>Adaptive Movil PC</name>
     <description>Una máquina virtual de experiencia de escritorio para Android.</description>
     <author email="Juanmarichal57@Gmail.com" href="https://github.com/juancitoozmarichal07-glitch/Adaptive_movil-PC">Juan Gonzalo Marichal Cardozo</author>
+    
+    <!-- Esta es la puerta de entrada a tu apartamento. ¡Es crucial! -->
     <content src="index.html" />
+    
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <platform name="android">
         <allow-intent href="market:*" />
     </platform>
+    
+    <!-- Preferencias Clave -->
     <preference name="DisallowOverscroll" value="true" />
     <preference name="Orientation" value="landscape" />
     <preference name="Fullscreen" value="true" />
     <preference name="AndroidXEnabled" value="true" />
+    
+    <!-- ================================================================== -->
+    <!-- ▼▼▼ ¡LA LLAVE MAESTRA! Evita que se quede en la pantalla de bienvenida ▼▼▼ -->
+    <!-- ================================================================== -->
+    <preference name="AutoHideSplashScreen" value="true" />
+    <preference name="SplashMaintainAspectRatio" value="true" />
 
-    <!-- ================================================================== -->
-    <!-- ▼▼▼ EL PUENTE A ANDROID - VERSIÓN FÉNIX (Mínima y Robusta) ▼▼▼ -->
-    <!-- ================================================================== -->
+    <!-- Plugins (estos ya sabemos que funcionan) -->
     <plugin name="cordova-plugin-intent" />
     <plugin name="cordova-plugin-applist" />
 
