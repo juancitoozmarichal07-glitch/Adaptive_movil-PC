@@ -25,31 +25,19 @@ jobs:
       - name: 'PASO 3: Instalando Cordova...'
         run: npm install -g cordova
 
-      - name: 'PASO 4: Inicializando el proyecto Cordova...'
-        run: |
-          # Creamos una carpeta temporal para nuestros archivos.
-          mkdir ../temp_files
-          # Movemos nuestros archivos (con los nombres correctos) a la carpeta temporal.
-          mv www ../temp_files/
-          mv Config.xml ../temp_files/  # <-- ¡AQUÍ ESTÁ LA CORRECCIÓN!
-          
-          # Creamos el proyecto Cordova en la carpeta actual.
-          cordova create . com.adaptivemovilpc.gel "Adaptive Movil PC"
-          
-          # Borramos la carpeta 'www' y 'config.xml' por defecto que crea Cordova.
-          rm -rf www config.xml
-          
-          # Movemos nuestros archivos personalizados de vuelta.
-          mv ../temp_files/www .
-          mv ../temp_files/Config.xml . # <-- ¡AQUÍ ESTÁ LA CORRECCIÓN!
+      # --- ¡¡¡LA LÓGICA CORRECTA Y SIMPLIFICADA!!! ---
+      # No creamos carpetas, no movemos archivos.
+      # Simplemente, ejecutamos los comandos de Cordova.
+      # Cordova es lo suficientemente inteligente para encontrar www/ y Config.xml
+      # si están en la raíz del repositorio.
 
-      - name: 'PASO 5: Añadiendo la plataforma Android...'
+      - name: 'PASO 4: Añadiendo la plataforma Android...'
         run: cordova platform add android
 
-      - name: 'PASO 6: CONSTRUYENDO LA APK...'
+      - name: 'PASO 5: CONSTRUYENDO LA APK...'
         run: cordova build android --release
 
-      - name: 'PASO 7: Subiendo la APK como Artefacto...'
+      - name: 'PASO 6: Subiendo la APK como Artefacto...'
         uses: actions/upload-artifact@v4
         with:
           name: Adaptive-Movil-PC-APK
