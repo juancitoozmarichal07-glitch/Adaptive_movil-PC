@@ -2,31 +2,79 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <!-- Meta tags para una experiencia móvil tipo app -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
     <title>Adaptive Movil PC</title>
+    
+    <!-- Enlace a la hoja de estilos -->
     <link rel="stylesheet" href="style.css">
+    
+    <!-- Icono para la pestaña del navegador o acceso directo -->
+    <link rel="icon" type="image/png" href="img/icon_notepad.png">
 </head>
 <body>
+    <!-- ▼▼▼ REEMPLAZA EL DIV DE "connection-prompt" CON ESTE ▼▼▼ -->
+<div id="connection-prompt">
+    <div class="prompt-box">
+        <h1>Adaptive Movil PC</h1>
+        
+        <!-- El mensaje que cambiará dinámicamente -->
+        <p id="prompt-message">Iniciando detección...</p>
+        
+        <!-- Los indicadores de estado visuales -->
+        <div class="status-indicators">
+            <div id="mouse-status" class="status-item">
+                <span class="icon">🖱️</span> Ratón
+            </div>
+            <div id="keyboard-status" class="status-item">
+                <span class="icon">⌨️</span> Teclado
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <!-- El Escritorio: Contenedor principal para iconos y ventanas -->
     <div id="desktop">
-        <!-- Las ventanas se crearán aquí con JavaScript -->
+        <div id="desktop-icons">
+            <!-- Los iconos de las aplicaciones se añadirán aquí dinámicamente con JavaScript -->
+        </div>
+        <!-- Las ventanas de las aplicaciones se añadirán aquí dinámicamente -->
     </div>
 
+    <!-- La Barra de Tareas -->
     <div id="taskbar">
-        <div id="start-button" class="taskbar-section">
-            <div class="icon" id="start-icon"></div>
+        <!-- Botón/Orbe de Inicio -->
+        <div id="start-orb-container">
+            <div id="start-orb" title="Inicio">
+                <span>A</span>
+            </div>
         </div>
-        <div id="task-list" class="taskbar-section">
-            <!-- Iconos de apps ancladas/abiertas -->
+        
+        <!-- Lista de aplicaciones abiertas -->
+        <div id="task-list">
+            <!-- Los botones de las tareas se crearán aquí con JavaScript -->
         </div>
-        <div id="system-tray" class="taskbar-section">
-            <div class="tray-item" id="wifi-status"></div>
-            <div class="tray-item" id="battery-status"></div>
-            <div class="tray-item" id="clock"></div>
+        
+        <!-- Bandeja del sistema (Reloj, etc.) -->
+        <div id="system-tray">
+            <div id="clock">00:00</div>
         </div>
     </div>
 
-    <!-- El futuro Cajón de Aplicaciones irá aquí -->
+    <!-- El Menú de Inicio (inicialmente oculto) -->
+    <div id="start-menu" class="hidden">
+        <!-- Los items del menú se podrían añadir aquí dinámicamente -->
+    </div>
 
+    <!-- Enlace al archivo de Cordova (si lo usas, si no, no es necesario) -->
+    <!-- <script src="cordova.js"></script> -->
+    
+    <!-- Enlace al archivo JavaScript principal -->
     <script src="script.js"></script>
+
 </body>
 </html>

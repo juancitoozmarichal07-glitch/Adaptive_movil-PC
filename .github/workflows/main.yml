@@ -30,10 +30,10 @@ jobs:
           cordova create cordova_project com.adaptivemovilpc.gel "Adaptive Movil PC"
           rm -rf cordova_project/www
           cp -r www cordova_project/
-          cp Config.xml cordova_project/config.xml
+          cp config.xml cordova_project/config.xml # Asegúrate de que el nombre del archivo sea 'config.xml' en minúsculas
           
-      - name: 'PASO 5: Añadiendo la plataforma Android...'
-        run: cordova platform add android
+      - name: 'PASO 5: Añadiendo plataforma e instalando plugins...' # <-- ¡PASO CLAVE AÑADIDO!
+        run: cordova platform add android && cordova prepare android
         working-directory: ./cordova_project
 
       - name: 'PASO 6: CONSTRUYENDO LA APK (MODO DEBUG)...'
@@ -44,6 +44,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: Adaptive-Movil-PC-APK
-          # --- ¡¡¡AQUÍ ESTÁ LA CORRECCIÓN FINAL!!! ---
-          # La ruta correcta a la APK de debug.
           path: cordova_project/platforms/android/app/build/outputs/apk/debug/app-debug.apk

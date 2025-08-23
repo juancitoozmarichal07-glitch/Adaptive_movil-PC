@@ -18,5 +18,8 @@
     <preference name="Fullscreen" value="true" />
     <preference name="AndroidXEnabled" value="true" />
 
-</widget>
+    <!-- ▼▼▼ ¡AQUÍ ESTÁ LA LÍNEA AÑADIDA! ▼▼▼ -->
+    <!-- Este es el "puente" para que tu app pueda leer la lista de apps de Android -->
+    <plugin name="cordova-plugin-applist-2" spec="2.2.3" />
 
+</widget>
