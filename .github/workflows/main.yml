@@ -25,30 +25,25 @@ jobs:
       - name: 'PASO 3: Instalando Cordova...'
         run: npm install -g cordova
 
-      # --- ¡¡¡LA LÓGICA CORRECTA Y A PRUEBA DE FALLOS!!! ---
       - name: 'PASO 4: Creando y Configurando el Proyecto Cordova...'
         run: |
-          # 1. Creamos una carpeta NUEVA y VACÍA para el proyecto.
           cordova create cordova_project com.adaptivemovilpc.gel "Adaptive Movil PC"
-          
-          # 2. Borramos la 'www' por defecto que crea Cordova.
           rm -rf cordova_project/www
-          
-          # 3. Copiamos nuestro código (www y Config.xml) a la nueva carpeta.
           cp -r www cordova_project/
           cp Config.xml cordova_project/config.xml
           
       - name: 'PASO 5: Añadiendo la plataforma Android...'
-        # Ahora, todos los comandos se ejecutan dentro de la carpeta 'cordova_project'.
         run: cordova platform add android
         working-directory: ./cordova_project
 
-      - name: 'PASO 6: CONSTRUYENDO LA APK...'
-        run: cordova build android --release
+      - name: 'PASO 6: CONSTRUYENDO LA APK (MODO DEBUG)...'
+        run: cordova build android --debug
         working-directory: ./cordova_project
 
-      - name: 'PASO 7: Subiendo la APK como Artefacto...'
+      - name: 'PASO 7: Subiendo la APK de DEBUG como Artefacto...'
         uses: actions/upload-artifact@v4
         with:
           name: Adaptive-Movil-PC-APK
-          path: cordova_project/platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk
+          # --- ¡¡¡AQUÍ ESTÁ LA CORRECCIÓN FINAL!!! ---
+          # La ruta correcta a la APK de debug.
+          path: cordova_project/platforms/android/app/build/outputs/apk/debug/app-debug.apk
