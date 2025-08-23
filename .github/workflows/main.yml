@@ -23,10 +23,10 @@ jobs:
           node-version: '18'
 
       # ==================================================================
-      # ▼▼▼ ¡LA LÍNEA MÁGICA! AÑADIDA A TU PROPIO ARCHIVO ▼▼▼
+      # ▼▼▼ ¡LA LÍNEA MÁGICA! AHORA CON LA SINTAXIS CORRECTA ▼▼▼
       # ==================================================================
       - name: 'PASO 3: Forzando a Git a usar HTTPS en lugar de SSH...'
-        run: git config --global url."https://github.com/".insteadOf git@github.com:
+        run: git config --global url.https://github.com/.insteadOf git@github.com:
 
       - name: 'PASO 4: Instalando Cordova...'
         run: npm install -g cordova
@@ -36,11 +36,9 @@ jobs:
           cordova create cordova_project com.adaptivemovilpc.gel "Adaptive Movil PC"
           rm -rf cordova_project/www
           cp -r www cordova_project/
-          # Usamos tu nombre de archivo 'Config.xml' con mayúscula, como lo tenías.
           cp Config.xml cordova_project/config.xml
           
       - name: 'PASO 6: Añadiendo plataforma e instalando plugins...'
-        # Mantenemos tu excelente comando que usa 'cordova prepare'
         run: cordova platform add android && cordova prepare android
         working-directory: ./cordova_project
 
