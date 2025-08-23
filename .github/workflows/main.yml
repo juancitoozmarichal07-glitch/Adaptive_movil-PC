@@ -30,7 +30,7 @@ jobs:
           cordova create cordova_project com.adaptivemovilpc.gel "Adaptive Movil PC"
           rm -rf cordova_project/www
           cp -r www cordova_project/
-          cp config.xml cordova_project/config.xml # Asegúrate de que el nombre del archivo sea 'config.xml' en minúsculas
+          cp Config.xml cordova_project/config.xml # Asegúrate de que el nombre del archivo sea 'config.xml' en minúsculas
           
       - name: 'PASO 5: Añadiendo plataforma e instalando plugins...' # <-- ¡PASO CLAVE AÑADIDO!
         run: cordova platform add android && cordova prepare android
