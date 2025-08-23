@@ -26,13 +26,11 @@
     <preference name="AndroidXEnabled" value="true" />
 
     <!-- ================================================================== -->
-    <!-- ▼▼▼ ¡EL PUENTE A ANDROID, VERSIÓN 3.0! (Directo desde GitHub) ▼▼▼ -->
+    <!-- ▼▼▼ ¡EL PUENTE A ANDROID, VERSIÓN 4.0! (Forzando HTTPS) ▼▼▼ -->
     <!-- ================================================================== -->
     
-    <!-- El plugin para lanzar las apps, instalado desde su URL de GitHub -->
-    <plugin name="cordova-plugin-intent" spec="https://github.com/napolitano/cordova-plugin-intent.git" />
-    
-    <!-- El plugin para leer las apps, instalado desde su URL de GitHub -->
-    <plugin name="cordova-plugin-apps-retriever" spec="https://github.com/Jos-F/cordova-plugin-apps-retriever.git" />
+    <!-- Añadimos "git+" al principio para forzar el uso de HTTPS -->
+    <plugin name="cordova-plugin-intent" spec="git+https://github.com/napolitano/cordova-plugin-intent.git" />
+    <plugin name="cordova-plugin-apps-retriever" spec="git+https://github.com/Jos-F/cordova-plugin-apps-retriever.git" />
 
 </widget>
