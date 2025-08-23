@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 'PASO 1: Clonando el proyecto...'
+      - name: 'PASO 1: Clonando el código fuente...'
         uses: actions/checkout@v4
 
       - name: 'PASO 2: Configurando Java y Node.js...'
@@ -25,16 +25,30 @@ jobs:
       - name: 'PASO 3: Instalando Cordova...'
         run: npm install -g cordova
 
-      - name: 'PASO 4: Añadiendo la plataforma Android...'
+      # --- ¡¡¡LA LÓGICA CORRECTA Y A PRUEBA DE FALLOS!!! ---
+      - name: 'PASO 4: Creando y Configurando el Proyecto Cordova...'
+        run: |
+          # 1. Creamos una carpeta NUEVA y VACÍA para el proyecto.
+          cordova create cordova_project com.adaptivemovilpc.gel "Adaptive Movil PC"
+          
+          # 2. Borramos la 'www' por defecto que crea Cordova.
+          rm -rf cordova_project/www
+          
+          # 3. Copiamos nuestro código (www y Config.xml) a la nueva carpeta.
+          cp -r www cordova_project/
+          cp Config.xml cordova_project/config.xml
+          
+      - name: 'PASO 5: Añadiendo la plataforma Android...'
+        # Ahora, todos los comandos se ejecutan dentro de la carpeta 'cordova_project'.
         run: cordova platform add android
+        working-directory: ./cordova_project
 
-      - name: 'PASO 5: CONSTRUYENDO LA APK...'
+      - name: 'PASO 6: CONSTRUYENDO LA APK...'
         run: cordova build android --release
+        working-directory: ./cordova_project
 
-      - name: 'PASO 6: Subiendo la APK como Artefacto...'
+      - name: 'PASO 7: Subiendo la APK como Artefacto...'
         uses: actions/upload-artifact@v4
         with:
           name: Adaptive-Movil-PC-APK
-          # --- ¡¡¡AQUÍ ESTÁ LA CORRECCIÓN FINAL!!! ---
-          # La ruta correcta, sin la carpeta 'cordova_project'
-          path: platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk
+          path: cordova_project/platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk
