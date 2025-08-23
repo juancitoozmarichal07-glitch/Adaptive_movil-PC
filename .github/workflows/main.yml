@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 'PASO 1: Clonando el proyecto...'
+      - name: 'PASO 1: Clonando el código fuente...'
         uses: actions/checkout@v4
 
       - name: 'PASO 2: Configurando Java y Node.js...'
@@ -25,20 +25,30 @@ jobs:
       - name: 'PASO 3: Instalando Cordova...'
         run: npm install -g cordova
 
-      # --- ¡¡¡LA LÓGICA CORRECTA Y SIMPLIFICADA!!! ---
-      # No creamos carpetas, no movemos archivos.
-      # Simplemente, ejecutamos los comandos de Cordova.
-      # Cordova es lo suficientemente inteligente para encontrar www/ y Config.xml
-      # si están en la raíz del repositorio.
-
-      - name: 'PASO 4: Añadiendo la plataforma Android...'
+      # --- ¡¡¡LA LÓGICA CORRECTA Y A PRUEBA DE FALLOS!!! ---
+      - name: 'PASO 4: Creando el proyecto Cordova desde los archivos existentes...'
+        run: |
+          # 1. Creamos una carpeta temporal para el proyecto final
+          mkdir cordova_build
+          
+          # 2. Movemos nuestro código fuente a esa carpeta
+          mv .github www Config.xml README.md cordova_build/
+          
+          # 3. Entramos en la carpeta y creamos el proyecto Cordova
+          cd cordova_build
+          cordova create . com.adaptivemovilpc.gel "Adaptive Movil PC"
+          
+      - name: 'PASO 5: Añadiendo la plataforma Android...'
+        # Ahora, todos los comandos se ejecutan desde la carpeta 'cordova_build'
         run: cordova platform add android
+        working-directory: ./cordova_build
 
-      - name: 'PASO 5: CONSTRUYENDO LA APK...'
+      - name: 'PASO 6: CONSTRUYENDO LA APK...'
         run: cordova build android --release
+        working-directory: ./cordova_build
 
-      - name: 'PASO 6: Subiendo la APK como Artefacto...'
+      - name: 'PASO 7: Subiendo la APK como Artefacto...'
         uses: actions/upload-artifact@v4
         with:
           name: Adaptive-Movil-PC-APK
-          path: platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk
+          path: cordova_build/platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk
