@@ -26,9 +26,13 @@
     <preference name="AndroidXEnabled" value="true" />
 
     <!-- ================================================================== -->
-    <!-- ▼▼▼ ¡AQUÍ ESTÁN LOS PLUGINS! EL PUENTE A ANDROID ▼▼▼ -->
+    <!-- ▼▼▼ ¡EL PUENTE A ANDROID, VERSIÓN 2.0! (Plugins Fiables) ▼▼▼ -->
     <!-- ================================================================== -->
-    <plugin name="cordova-plugin-applist" spec="2.2.2" />
+    
+    <!-- El plugin para lanzar las apps (este siempre ha funcionado bien) -->
     <plugin name="cordova-plugin-intent" spec="1.1.1" />
+    
+    <!-- ¡EL NUEVO ESCÁNER! Este es el plugin que SÍ funciona -->
+    <plugin name="cordova-plugin-apps-retriever" spec="0.0.2" />
 
 </widget>
