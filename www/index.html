@@ -8,22 +8,24 @@
 </head>
 <body>
     <div id="desktop">
-        <!-- La ventana del Bloc de Notas ya no estará aquí, la crearemos con JS -->
+        <!-- Las ventanas se crearán aquí con JavaScript -->
     </div>
 
     <div id="taskbar">
-        <div id="start-button" class="taskbar-item">Inicio</div>
-        <div id="task-list">
-            <!-- Los botones de las apps se añadirán aquí con JS -->
+        <div id="start-button" class="taskbar-section">
+            <div class="icon" id="start-icon"></div>
         </div>
-        <div id="clock" class="taskbar-item"></div>
+        <div id="task-list" class="taskbar-section">
+            <!-- Iconos de apps ancladas/abiertas -->
+        </div>
+        <div id="system-tray" class="taskbar-section">
+            <div class="tray-item" id="wifi-status"></div>
+            <div class="tray-item" id="battery-status"></div>
+            <div class="tray-item" id="clock"></div>
+        </div>
     </div>
 
-    <!-- ¡NUEVO! El Menú Inicio (inicialmente oculto) -->
-    <div id="start-menu" class="hidden">
-        <div class="start-menu-item" data-app="notepad">Bloc de Notas</div>
-        <div class="start-menu-item" data-app="calculator">Calculadora (Próximamente)</div>
-    </div>
+    <!-- El futuro Cajón de Aplicaciones irá aquí -->
 
     <script src="script.js"></script>
 </body>

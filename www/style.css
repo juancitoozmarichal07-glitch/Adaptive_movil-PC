@@ -1,59 +1,126 @@
-/* ... (Estilos anteriores sin cambios) ... */
+/* --- Reseteo y Configuración Base --- */
 body, html {
     width: 100%;
     height: 100%;
     margin: 0;
     overflow: hidden;
-    font-family: sans-serif;
-    background-color: #333;
-    user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: white;
 }
 
+/* --- El Escritorio y su Fondo --- */
 #desktop {
     width: 100%;
-    height: calc(100% - 40px);
-    background: url('https://i.imgur.com/8z3Z6kL.png') center/cover; /* Fondo de escritorio */
+    height: 100%;
+    /* ¡NUEVO! Usamos la imagen local */
+    background: url('img/wallpaper.png') center/cover no-repeat;
     position: relative;
 }
 
+/* --- La Nueva Barra de Tareas (Taskbar) --- */
+#taskbar {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 95%;
+    max-width: 1200px;
+    height: 50px;
+    
+    /* ¡NUEVO! Efecto Glassmorphism */
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 12px;
+    
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    box-sizing: border-box;
+    z-index: 1000;
+}
+
+.taskbar-section {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+#task-list {
+    flex-grow: 1;
+    justify-content: center;
+}
+
+#system-tray {
+    margin-left: auto;
+    gap: 15px;
+}
+
+/* --- Iconos de la Barra de Tareas --- */
+.icon, .tray-item {
+    width: 30px;
+    height: 30px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.icon:hover, .tray-item:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+#start-icon {
+    /* Placeholder para el icono de inicio */
+    background-color: #00aaff;
+}
+
+#clock {
+    width: auto;
+    background-color: transparent;
+    font-size: 14px;
+    padding: 0 5px;
+}
+
+/* --- Estilos de Ventana (Sin cambios por ahora) --- */
 .window {
     position: absolute;
-    border: 1px solid #999;
-    background-color: #f0f0f0;
-    box-shadow: 0 0 10px rgba(0,0,0,0.5);
-    border-radius: 5px;
-    min-width: 250px;
-    min-height: 150px;
+    border: 1px solid #555;
+    background-color: #2c2c2c; /* Fondo oscuro para ventanas */
+    box-shadow: 0 0 20px rgba(0,0,0,0.7);
+    border-radius: 8px;
+    min-width: 300px;
+    min-height: 200px;
     display: flex;
     flex-direction: column;
+    color: #e0e0e0;
 }
 
 .title-bar {
-    background-color: #ddd;
-    padding: 5px;
+    background-color: #1e1e1e;
+    padding: 8px;
     cursor: move;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid #ccc;
     font-weight: bold;
 }
 
 .window-controls button {
-    width: 20px;
-    height: 20px;
-    border: 1px solid #999;
-    margin-left: 3px;
+    width: 18px;
+    height: 18px;
+    border: none;
+    border-radius: 50%;
+    margin-left: 6px;
     cursor: pointer;
 }
-.window-controls .minimize { background-color: lightblue; }
-.window-controls .maximize { background-color: lightgreen; }
-.window-controls .close { background-color: lightcoral; }
+.window-controls .close { background-color: #ff5f57; }
+.window-controls .minimize { background-color: #febb2e; }
+.window-controls .maximize { background-color: #28c840; }
 
 .content {
     padding: 10px;
@@ -63,76 +130,9 @@ body, html {
 .content textarea {
     width: 100%;
     height: 100%;
-    border: 1px solid #ccc;
+    background-color: #333;
+    color: #f1f1f1;
+    border: 1px solid #555;
     box-sizing: border-box;
     resize: none;
-}
-
-#taskbar {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 40px;
-    background-color: #222;
-    color: white;
-    display: flex;
-    align-items: center;
-    padding: 0 5px;
-    box-sizing: border-box;
-    z-index: 1000;
-}
-
-.taskbar-item {
-    padding: 5px 10px;
-    margin: 0 2px;
-    border-radius: 3px;
-    cursor: pointer;
-}
-
-#start-button {
-    background-color: #008000;
-    font-weight: bold;
-}
-
-#task-list {
-    display: flex;
-    flex-grow: 1;
-}
-
-.task-item {
-    background-color: #555;
-    border: 1px solid #777;
-    min-width: 150px; /* Estilo Windows Vista */
-    text-align: center;
-}
-
-#clock {
-    margin-left: auto;
-}
-
-/* --- ¡NUEVOS ESTILOS! --- */
-#start-menu {
-    position: absolute;
-    bottom: 40px; /* Justo encima de la barra de tareas */
-    left: 0;
-    width: 200px;
-    background-color: #333;
-    border: 1px solid #777;
-    color: white;
-    z-index: 999; /* Debajo de la barra de tareas pero encima del escritorio */
-    padding: 5px;
-    box-sizing: border-box;
-}
-
-.start-menu-item {
-    padding: 10px;
-    cursor: pointer;
-}
-
-.start-menu-item:hover {
-    background-color: #555;
-}
-
-.hidden {
-    display: none;
 }
